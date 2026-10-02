@@ -1,3 +1,3 @@
-module big0
+module bigO
 
 go 1.27.1
