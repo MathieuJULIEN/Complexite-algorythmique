@@ -50,3 +50,21 @@ func BenchmarkSearch(b *testing.B) {
 		})
 	}
 }
+
+var sinkSlice []int
+func BenchmarkCount(b *testing.B) {
+	for _, n := range []int{1_000, 10_000, 100_000} {
+		pile := Sorted(n)
+		m := Random(n, n)
+		plafond := n
+		if len(m)>0 {
+			plafond = m[0]
+		}
+		b.Run(fmt.Sprintf("V1/n=%d", n), func(b *testing.B) {
+			b.ResetTimer()
+			for i := 0; i < b.N; i++ {
+				sinkSlice = CountV1(pile, plafond)
+			}
+		})
+	}
+}
