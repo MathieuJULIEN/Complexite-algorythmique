@@ -38,3 +38,15 @@ func BenchmarkTowerHeight(b *testing.B) {
 		})
 	}
 }
+
+func BenchmarkSearch(b *testing.B) {
+	for _, n := range []int{1_000, 10_000, 100_000} {
+		pile := Sorted(n)
+		m := Random(1, n)
+		b.Run(fmt.Sprintf("V1/n=%d", n), func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				sink = SearchV1(pile, m[0])
+			}
+		})
+	}
+}
